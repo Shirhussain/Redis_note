@@ -1,0 +1,184 @@
+set server:name someserver
+get server:name
+
+set server:port 8000
+get server:port
+
+
+
+set name "shirhussain"
+get name 
+
+
+expire name 50 ----> it will delete the name after 50 second 
+ttl name       ----> it will show the remaining time to expire 
+
+
+SETEX name 50 "shirhussain" -----> it wil set the name and expire time at once 
+
+
+PERSIST name  ----> it will expire the expirey date it mean that it wil be persist
+
+
+MSET name1 "Shirhussain" name2 "Amirkhan" ---> if you wanna set more than one 
+
+get name1 
+get nam2 
+
+
+APPEND name1 " Danishyar" --> if you wannad append somethign
+GET name1 
+
+
+RENAME name1 esm  --> If you wanna rename name1 to esm 
+
+GET esm 
+
+
+FLUSHALL  ---> Delte all 
+
+
+LPUSH ---> add to the left of the list or at the biganing 
+RPUSH ---l ADD to the riight of the list or a the end of 
+
+LPUSH people "shir"
+LPUSH people "Amir"
+Lpush people "Golnar"
+LPUSH people "Rana"
+
+
+LRANGE people 0 -1 --> it will list nad  show the people all of the list
+
+LRANGE people 1 3  --> it wil only show "golnar Amir and shir"
+
+RPUSH  people "Rezagol" ---> it will push at the end of my list
+
+
+RPUSH people "BILL GATES" 
+
+RPOP people  ----> it will remove the bill gates from the list 
+
+
+LPOP people ---> will remove from the lift of list 
+
+
+LINSERT people BEFORE "Amir" "Sahgol"  --> it will add shagol the left 
+
+
+
+for more infor you should search "Redis list " on google
+
+https://redis.io/commands/#list
+
+
+
+============================= SETS in Redis ++++++++++++++++++++========
+
+for more info go hrer------> https://redis.io/commands#set
+
+
+SADD car "Tesla"
+SADD car "Honda"
+SADD car "BMW"
+SADD car "Ford"
+
+
+SISMEMBER car "Ford" ---> serarch that if the car is in our set 
+			  if it is so it wil show me "1" otherwise "0"
+
+SISMEMBER car "pride" ---> it will whow "0"
+
+
+SMEMBERS car  ---> it will show the entire set
+
+SMOVE car mycar "Honda" ---> it will move "Honda" form car set to mycar set 
+
+SREM car "Ford"  ---> remove Ford form car 
+
+
+============================ sorted set ========================
+Redis Sorted Sets are similar to Redis Sets but the first one has the unique feature of values stored. It means every member of a Sorted Set is associated with a score which can be used to take the sorted set ordered, from the smallest to the greatest score.
+
+https://redis.io/commands#sorted_set <---- for more info 
+
+
+
+ZADD users 1955 "Bill gates"
+
+ZADD users 2000 "shir hussain"
+
+ZADD users 2010 "karim"
+
+ZADD users 1818 "Adeson"
+
+ZADD users 2001 "Amir"
+
+
+ZRANK users "Bill gates" ----------> it will rank by given number for example the number is here "Adeson" and number is "Bill gates" and her show as "Bil gates"
+
+
+ZRANGE users 0 -1 ---> show us entire range of sorted set 
+
+
+ZINCRBY users 1000 "Adeson"  ---- it will increase by 1000 year to adesson  and becom 2818
+
+================================ Hash =====================
+
+Sets field in the hash stored at key to value. If key does not exist, a new key holding a hash is created. If field already exists in the hash, it is overwritten.
+
+
+HSET user:shir name "Shirhussain"
+HSET user:shir email "sh.danishyar@yahoo.co"
+
+to get the value 
+
+HGET user:shir name
+HGET user:shir email
+
+
+HGETALL user:shir -----> if you wanna get all of them 
+
+
+HMSET user:amir name "amirkhan" email "amir@yahoo.com" age "25" ---> if you wanna set multiple hash set at once 
+
+HGETALL user:amir -----> to get it user
+
+
+HKEYS user:shir ----> just give you the keys 
+
+HVALS user:amir ----> JSUT GIVe you the values 
+
+
+HINCRBY user:amir age 10 ---> it will increase the age of Amir by 10 
+
+
+HDEL user:amir age ----> to delet age of user
+
+
+HGETALL user:amir ---- > yo can see that age gone 
+
+HLEN user:shir ---> it will give the length of user  
+
+
+
+
+================================= Redis persistence ===================
+
+
+snapshot of data 
+
+if you wanna save to disk so to it the following command
+
+SAVE 
+
+if you wanan have in do it in interval 
+
+save 60 1000 -----> it will  save every 60 second at lest 1000 data changed ;i
+
+
+if you wanna find the file of current data base in linux wich i'm using 
+here is the path ----> var/lib/redis/dump.rdb
+
+
+
+appendonly yes ---> it will log evry singlthing you do -- you can set to yest in config file ----> her is the path --> etc/redis/redis.conf
